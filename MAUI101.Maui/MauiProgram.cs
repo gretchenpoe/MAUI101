@@ -29,7 +29,6 @@ namespace MAUI101.Maui
                 .Build();
             builder.Configuration.AddConfiguration(config);
 
-            builder.Services.AddTransient<MainPage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
