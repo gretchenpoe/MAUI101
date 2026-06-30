@@ -8,13 +8,13 @@
     Title="MAUI101.Maui">
 
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home" Icon="home.png">
             <ShellContent Title="Home" ContentTemplate="{DataTemplate local:AboutPage}" />
         </Tab>
-        <Tab Title="Adopt">
+        <Tab Title="Adopt" Icon="heart.png">
             <ShellContent ContentTemplate="{DataTemplate local:AdoptionListPage}" />
         </Tab>
-        <Tab Title="Forms">
+        <Tab Title="Forms" Icon="folder.png">
             <ShellContent ContentTemplate="{DataTemplate local:AdoptionFormsPage}" />
         </Tab>
     </TabBar>
