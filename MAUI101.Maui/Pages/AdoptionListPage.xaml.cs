@@ -1,9 +1,21 @@
+using MAUI101.Maui.Services;
+
 namespace MAUI101.Maui.Pages;
 
 public partial class AdoptionListPage : ContentPage
 {
-	public AdoptionListPage()
+	IPetService _petService;
+
+	public AdoptionListPage(IPetService petService)
 	{
 		InitializeComponent();
+		_petService = petService;
 	}
+
+	protected async override void OnAppearing()
+	{
+		base.OnAppearing();
+		collectionView.ItemsSource = await _petService.GetPetsAsync();
+	}
+
 }

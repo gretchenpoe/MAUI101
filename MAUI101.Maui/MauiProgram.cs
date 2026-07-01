@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using MAUI101.Maui.Services;
+using MAUI101.Maui.Pages;
+using MAUI101.Maui.Helpers;
 
 namespace MAUI101.Maui
 {
@@ -28,6 +31,17 @@ namespace MAUI101.Maui
                 .AddJsonStream(stream)
                 .Build();
             builder.Configuration.AddConfiguration(config);
+
+
+            builder.Services.AddSingleton<IRestService, RestService>();
+		    builder.Services.AddSingleton<IPetService, PetService>();
+
+            
+		    builder.Services.AddSingleton<AboutPage>();
+		    builder.Services.AddSingleton<AdoptionListPage>();
+            builder.Services.AddSingleton<AdoptionFormsPage>();
+            builder.Services.AddSingleton<LoginPage>();
+
 
 #if DEBUG
     		builder.Logging.AddDebug();
