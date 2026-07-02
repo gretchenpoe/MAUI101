@@ -48,14 +48,14 @@
                      <Label Text="Street Address" FontAttributes="Bold"/>
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
               </HorizontalStackLayout>
-              <Entry Text="{Binding AdoptionDetails.Address.StreetAddress, Mode=TwoWay}"    
+              <Entry Text="{Binding AdoptionDetails.StreetAddress, Mode=TwoWay}"    
                      Placeholder="Enter your street address" MaxLength="100"/>
               <!-- City Input -->
               <HorizontalStackLayout>
                      <Label Text="City" FontAttributes="Bold"/>
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
               </HorizontalStackLayout>
-              <Entry Text="{Binding AdoptionDetails.Address.City, Mode=TwoWay}"    
+              <Entry Text="{Binding AdoptionDetails.City, Mode=TwoWay}"    
                      Placeholder="Enter your city" MaxLength="100"/>
               <!-- State Input -->
               <HorizontalStackLayout>
@@ -64,7 +64,7 @@
               </HorizontalStackLayout>
               <Picker x:Name="picker"
                      ItemsSource="{Binding StatesList}"
-                     SelectedItem="{Binding AdoptionDetails.Address.State, Mode=TwoWay}"
+                     SelectedItem="{Binding AdoptionDetails.State, Mode=TwoWay}"
                      Title="Select a state">
               </Picker>
               <!-- ZIP Code Input -->
@@ -72,7 +72,7 @@
                             <Label Text="ZIP Code" FontAttributes="Bold"/>
                             <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
                      </HorizontalStackLayout>
-              <Entry Text="{Binding AdoptionDetails.Address.ZipCode, Mode=TwoWay}"    
+              <Entry Text="{Binding AdoptionDetails.ZipCode, Mode=TwoWay}"    
                      Placeholder="Enter your ZIP code" 
                       Keyboard="Telephone"
                       MaxLength="5"/>

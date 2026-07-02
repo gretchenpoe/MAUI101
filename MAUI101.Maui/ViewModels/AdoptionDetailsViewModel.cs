@@ -61,7 +61,6 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         var context = new ValidationContext(AdoptionDetails, serviceProvider: null, items: null);
         
         var results = new List<ValidationResult>();
-        var resultAddress = new List<ValidationResult>();
 
         // Manually trigger the validation engine
         bool isValid = Validator.TryValidateObject(AdoptionDetails, context, results, validateAllProperties: true);

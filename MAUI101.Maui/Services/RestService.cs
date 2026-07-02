@@ -68,7 +68,7 @@ namespace MAUI101.Maui.Services
         {
             Pet? pet = null;
 
-            Uri uri = new Uri($"{_configuration["ConfigurationHelper:APIUrl"]}/v1/images/{id}?api_key={_configuration["ConfigurationHelper:APIKey"]}");
+            Uri uri = new Uri($"{_configuration["ConfigurationHelper:APIUrl"]}/v1/images/{id}");
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);

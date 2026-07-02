@@ -26,7 +26,7 @@ public partial class AdoptionListPage : ContentPage
 		if (current == null)
 			return;
 
-		// Navigate to the details page, passing the ID as a query parameter.
+		// Navigate to the details page, passing the pet
 		var navigationParameter = new Dictionary<string, object>
 		{
 			{ "Pet", current } // Can pass strings, IDs, or complex objects
