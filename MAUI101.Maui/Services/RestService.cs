@@ -46,7 +46,7 @@ namespace MAUI101.Maui.Services
         {
             Pets = new List<Pet>();
 
-            Uri uri = new Uri($"{_configuration["ConfigurationHelper:APIUrl"]}/v1/images/search?limit=10&api_key={_configuration["ConfigurationHelper:APIKey"]}");
+            Uri uri = new Uri($"{_configuration["ConfigurationHelper:APIUrl"]}/v1/images/search?limit=20&has_breeds=1&api_key={_configuration["ConfigurationHelper:APIKey"]}");
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);

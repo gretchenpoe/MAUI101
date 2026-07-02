@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MAUI101.Maui.Models"
+             x:Class="MAUI101.Maui.Pages.AdoptionListPage"
+             Title="Pets Available for Adoption">
+    <CollectionView x:Name="collectionView"
+                        Margin="20"
+                        SelectionMode="Single"
+                        SelectionChanged="OnCollectionViewSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Pet">
+                     <Grid HorizontalOptions="Fill" Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="75" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.RowSpan="2" 
+                               Source="{Binding Url}" 
+                               Aspect="AspectFill"
+                               HeightRequest="100" 
+                               WidthRequest="150" />
+                        <Label Grid.Column="1" 
+                               Text="{Binding Breeds[0].Name}" 
+                               FontAttributes="Bold"
+                               LineBreakMode="TailTruncation" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1" 
+                               Text="{Binding Breeds[0].Temperament}"
+                               LineBreakMode="WordWrap"
+                               FontAttributes="Italic" 
+                               VerticalOptions="Start" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

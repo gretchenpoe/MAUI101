@@ -4,6 +4,7 @@ using System.Reflection;
 using MAUI101.Maui.Services;
 using MAUI101.Maui.Pages;
 using MAUI101.Maui.Helpers;
+using MAUI101.Maui.ViewModels;
 
 namespace MAUI101.Maui
 {
@@ -40,7 +41,9 @@ namespace MAUI101.Maui
 		    builder.Services.AddSingleton<AboutPage>();
 		    builder.Services.AddSingleton<AdoptionListPage>();
             builder.Services.AddSingleton<AdoptionFormsPage>();
-            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<AdoptionDetailsPage>();
+            builder.Services.AddTransient<AdoptionDetailsViewModel>();
 
 
 #if DEBUG

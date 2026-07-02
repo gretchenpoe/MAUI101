@@ -1,4 +1,5 @@
 ﻿using MAUI101.Maui.Helpers;
+using MAUI101.Maui.Pages;
 
 namespace MAUI101.Maui
 {
@@ -8,7 +9,7 @@ namespace MAUI101.Maui
         {
             InitializeComponent();
 
-            //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute("AdoptionDetailsPage", typeof(AdoptionDetailsPage));
 
             //MainPage = ServiceProviderHelper.GetService<MainPage>();
         }

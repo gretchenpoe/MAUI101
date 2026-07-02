@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI101.Maui.Pages.AdoptionDetailsPage"
+             xmlns:viewmodels="clr-namespace:MAUI101.Maui.ViewModels"
+             Title="Adoption Details"
+              x:DataType="viewmodels:AdoptionDetailsViewModel">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+              <Image Source="{Binding AdoptionDetails.Pet.Url}" 
+                     Aspect="AspectFill"
+                     HeightRequest="100" 
+                     WidthRequest="150" />
+              <Label
+                     Text="{Binding AdoptionDetails.Pet.Breeds[0].Name}" 
+                     FontAttributes="Bold"
+                     LineBreakMode="TailTruncation" 
+                     HorizontalTextAlignment="Center"/>
+              <!-- First Name Input -->
+              <HorizontalStackLayout>
+                     <Label Text="First Name" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.FirstName, Mode=TwoWay}" 
+                     Placeholder="Enter your first name" MaxLength="100"/>
+              <!-- Middle Name Input -->
+              <Label Text="Middle Name" FontAttributes="Bold" />
+              <Entry Text="{Binding AdoptionDetails.MiddleName, Mode=TwoWay}" 
+                     Placeholder="Enter your middle name" MaxLength="100"/>
+              <!-- Last Name Input -->
+              <HorizontalStackLayout>
+                     <Label Text="Last Name" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.LastName, Mode=TwoWay}" 
+                     Placeholder="Enter your last name" MaxLength="100"/>
+              <!-- Birth Date Input -->
+              <HorizontalStackLayout>
+                     <Label Text="Date of Birth" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <DatePicker Date="{Binding AdoptionDetails.BirthDate, Mode=TwoWay}" 
+                     MinimumDate="01/01/1900"
+                     MaximumDate="{Binding MaxDate}"/>
+
+              <!-- Street Address Input -->
+              <HorizontalStackLayout>
+                     <Label Text="Street Address" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.Address.StreetAddress, Mode=TwoWay}"    
+                     Placeholder="Enter your street address" MaxLength="100"/>
+              <!-- City Input -->
+              <HorizontalStackLayout>
+                     <Label Text="City" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.Address.City, Mode=TwoWay}"    
+                     Placeholder="Enter your city" MaxLength="100"/>
+              <!-- State Input -->
+              <HorizontalStackLayout>
+                     <Label Text="State" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Picker x:Name="picker"
+                     ItemsSource="{Binding StatesList}"
+                     SelectedItem="{Binding AdoptionDetails.Address.State, Mode=TwoWay}"
+                     Title="Select a state">
+              </Picker>
+              <!-- ZIP Code Input -->
+              <HorizontalStackLayout>
+                            <Label Text="ZIP Code" FontAttributes="Bold"/>
+                            <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+                     </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.Address.ZipCode, Mode=TwoWay}"    
+                     Placeholder="Enter your ZIP code" 
+                      Keyboard="Telephone"
+                      MaxLength="5"/>
+
+              <!-- Phone Number -->
+              <HorizontalStackLayout>
+                     <Label Text="Phone Number" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.Phone, Mode=TwoWay}" 
+                     Placeholder="Enter your phone number" 
+                     Keyboard="Telephone" 
+                     MaxLength="15"/>
+
+              <!-- Email Input -->
+             <HorizontalStackLayout>
+                     <Label Text="Email Address" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.Email, Mode=TwoWay}" 
+                   Placeholder="Enter your email" 
+                   Keyboard="Email" 
+                   MaxLength="254"/>
+
+            <!-- Pet Name Input -->
+              <HorizontalStackLayout>
+                     <Label Text="Pet Name" FontAttributes="Bold"/>
+                     <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
+              </HorizontalStackLayout>
+              <Entry Text="{Binding AdoptionDetails.PetName, Mode=TwoWay}"    
+                     Placeholder="Enter your pet's name" MaxLength="100"/>
+
+
+              <!-- Submit Button -->
+              <Button Text="Submit" 
+                     Command="{Binding SubmitFormCommand}"
+                     Margin="0,20,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
