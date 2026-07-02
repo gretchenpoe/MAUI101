@@ -11,9 +11,14 @@ namespace MAUI101.Maui.Services
             _restService = service;
         }
 
-        public Task<List<Pet>> GetPetsAsync()
+        public async Task<List<Pet>> GetPetsAsync()
         {
-            return _restService.GetPetsAsync();
+            return await _restService.GetPetsAsync();
+        }
+
+        public async Task<Pet?> GetPetByIdAsync(string id)
+        {
+            return await _restService.GetPetByIdAsync(id);
         }
 
     }

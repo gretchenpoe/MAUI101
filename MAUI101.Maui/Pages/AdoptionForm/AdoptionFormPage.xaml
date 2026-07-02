@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUI101.Maui.Pages.AdoptionDetailsPage"
+             x:Class="MAUI101.Maui.Pages.AdoptionFormPage"
              xmlns:viewmodels="clr-namespace:MAUI101.Maui.ViewModels"
-             Title="Adoption Details"
-              x:DataType="viewmodels:AdoptionDetailsViewModel">
+             Title="Adoption Form"
+              x:DataType="viewmodels:AdoptionFormViewModel">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-              <Image Source="{Binding AdoptionDetails.Pet.Url}" 
+              <Image Source="{Binding PetDetails.Url}" 
                      Aspect="AspectFill"
                      HeightRequest="100" 
                      WidthRequest="150" />
               <Label
-                     Text="{Binding AdoptionDetails.Pet.Breeds[0].Name}" 
+                     Text="{Binding PetDetails.Breeds[0].Name}" 
                      FontAttributes="Bold"
                      LineBreakMode="TailTruncation" 
                      HorizontalTextAlignment="Center"/>

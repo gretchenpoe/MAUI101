@@ -64,5 +64,27 @@ namespace MAUI101.Maui.Services
             return Pets;
         }
 
+        public async Task<Pet?> GetPetByIdAsync(string id)
+        {
+            Pet? pet = null;
+
+            Uri uri = new Uri($"{_configuration["ConfigurationHelper:APIUrl"]}/v1/images/{id}?api_key={_configuration["ConfigurationHelper:APIKey"]}");
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    pet = JsonSerializer.Deserialize<Pet>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR {ex.Message}");
+            }
+
+            return pet;
+        }
+
     }
 }

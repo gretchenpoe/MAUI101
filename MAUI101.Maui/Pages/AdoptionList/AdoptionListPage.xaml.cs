@@ -31,7 +31,7 @@ public partial class AdoptionListPage : ContentPage
 		{
 			{ "Pet", current } // Can pass strings, IDs, or complex objects
 		};
-		Shell.Current.GoToAsync($"{nameof(AdoptionDetailsPage)}", navigationParameter);
+		Shell.Current.GoToAsync($"{nameof(AdoptionFormPage)}", navigationParameter);
 	}
 
 }

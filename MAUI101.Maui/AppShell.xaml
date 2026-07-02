@@ -15,7 +15,7 @@
             <ShellContent ContentTemplate="{DataTemplate local:AdoptionListPage}" />
         </Tab>
         <Tab Title="Forms" Icon="folder.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AdoptionFormsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:AdoptionFormListPage}" />
         </Tab>
     </TabBar>
 

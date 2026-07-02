@@ -2,13 +2,28 @@
 using CommunityToolkit.Mvvm.Input;
 using MAUI101.Maui.Models;
 using System.ComponentModel.DataAnnotations;
+using MAUI101.Maui.Services;
 
 namespace MAUI101.Maui.ViewModels;
 
-public partial class AdoptionDetailsViewModel : ObservableObject, IQueryAttributable
+public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributable
 {
+    private readonly IPetService _petService;
+    private readonly IAdoptionFormService _adoptionFormService;
+    public AdoptionFormViewModel(IPetService petService, IAdoptionFormService adoptionFormService)
+    {
+        _petService = petService;
+        _adoptionFormService = adoptionFormService;
+    }
+
     [ObservableProperty]
-    private AdoptionDetails _adoptionDetails;
+    private AdoptionForm _adoptionDetails;
+
+    [ObservableProperty]
+    private Pet _petDetails;
+
+    [ObservableProperty]
+    private bool _isReadonly = false;
 
 
     [ObservableProperty]
@@ -31,19 +46,19 @@ public partial class AdoptionDetailsViewModel : ObservableObject, IQueryAttribut
         if (!isValid)
             return;
 
-        // Process data
-        // save to local storage
+        // Save to local storage
+        await _adoptionFormService.AddNewAdoptionForm(AdoptionDetails);
+
         string message = $"Name: {AdoptionDetails.FirstName} {AdoptionDetails.LastName}\nEmail: {AdoptionDetails.Email}";
         await Shell.Current.DisplayAlert("Form Submitted", message, "Success");
 
-        
+        Shell.Current.GoToAsync("..");
         // Navigate back to the previous page
     }
 
     private async Task<bool> ValidateForm()
     {
         var context = new ValidationContext(AdoptionDetails, serviceProvider: null, items: null);
-        var addressContext = new ValidationContext(AdoptionDetails.Address, serviceProvider: null, items: null);
         
         var results = new List<ValidationResult>();
         var resultAddress = new List<ValidationResult>();
@@ -51,12 +66,9 @@ public partial class AdoptionDetailsViewModel : ObservableObject, IQueryAttribut
         // Manually trigger the validation engine
         bool isValid = Validator.TryValidateObject(AdoptionDetails, context, results, validateAllProperties: true);
 
-        bool isValidAddress = Validator.TryValidateObject(AdoptionDetails.Address, addressContext, resultAddress, validateAllProperties: true);
-
-        if (!isValid || !isValidAddress)
+        if (!isValid)
         {
-            await Shell.Current.DisplayAlert("Please fix the following validation errors:", "\n " + string.Join("\n ", results.Select(r => r.ErrorMessage)) 
-                + "\n " + string.Join("\n ", resultAddress.Select(r => r.ErrorMessage)), "OK");
+            await Shell.Current.DisplayAlert("Validation Errors", string.Join("\n", results.Select(r => r.ErrorMessage)), "OK");
             return false;
         }
         return true;
@@ -64,13 +76,22 @@ public partial class AdoptionDetailsViewModel : ObservableObject, IQueryAttribut
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("Pet", out var value) && value is Pet pet)
+        // Readonly of existing adoption form scenario
+        if (query.TryGetValue("AdoptionForm", out var formValue) && formValue is AdoptionForm form)
         {
-            // The data is successfully mapped here right as the page loads
-            AdoptionDetails = new AdoptionDetails
+            AdoptionDetails = form;
+            PetDetails = _petService.GetPetByIdAsync(form.PetId).Result;
+            IsReadonly = true;
+        }
+    
+        // Create adoption form scenario
+        if (query.TryGetValue("Pet", out var petValue) && petValue is Pet pet)
+        {
+            AdoptionDetails = new AdoptionForm
             {
-                Pet = pet
+                PetId = pet.ID
             };
+            PetDetails = pet;
         }
     }
 }

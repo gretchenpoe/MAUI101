@@ -9,7 +9,7 @@ namespace MAUI101.Maui
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("AdoptionDetailsPage", typeof(AdoptionDetailsPage));
+            Routing.RegisterRoute(nameof(AdoptionFormPage), typeof(AdoptionFormPage));
 
             //MainPage = ServiceProviderHelper.GetService<MainPage>();
         }

@@ -5,6 +5,7 @@ using MAUI101.Maui.Services;
 using MAUI101.Maui.Pages;
 using MAUI101.Maui.Helpers;
 using MAUI101.Maui.ViewModels;
+using MAUI101.Maui.Repositories;
 
 namespace MAUI101.Maui
 {
@@ -34,16 +35,19 @@ namespace MAUI101.Maui
             builder.Configuration.AddConfiguration(config);
 
 
+            builder.Services.AddSingleton<IAdoptionFormRepository, AdoptionFormRepository>();
+            builder.Services.AddSingleton<IAdoptionFormService, AdoptionFormService>();
             builder.Services.AddSingleton<IRestService, RestService>();
 		    builder.Services.AddSingleton<IPetService, PetService>();
 
             
 		    builder.Services.AddSingleton<AboutPage>();
 		    builder.Services.AddSingleton<AdoptionListPage>();
-            builder.Services.AddSingleton<AdoptionFormsPage>();
+            builder.Services.AddSingleton<AdoptionFormListPage>();
             builder.Services.AddTransient<LoginPage>();
-            builder.Services.AddTransient<AdoptionDetailsPage>();
-            builder.Services.AddTransient<AdoptionDetailsViewModel>();
+            builder.Services.AddTransient<AdoptionFormPage>();
+            builder.Services.AddTransient<AdoptionFormViewModel>();
+
 
 
 #if DEBUG
