@@ -21,7 +21,7 @@
     <Nullable>enable</Nullable>
 
     <!-- Display name -->
-    <ApplicationTitle>Watson &amp; Pugh Pet Adoption</ApplicationTitle>
+    <ApplicationTitle>Pet Adoption</ApplicationTitle>
 
     <!-- App Identifier -->
     <ApplicationId>com.watsonpughpetadoption.maui101.maui</ApplicationId>
@@ -43,7 +43,7 @@
     <MauiIcon Include="Resources\AppIcon\appicon.png" Color="#ffffff" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#639e54" BaseSize="200,200" />
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#639e54" BaseSize="128, 128" />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
