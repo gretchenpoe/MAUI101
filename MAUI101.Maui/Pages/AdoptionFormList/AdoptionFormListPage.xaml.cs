@@ -17,7 +17,16 @@ public partial class AdoptionFormListPage : ContentPage
 	protected async override void OnAppearing()
 	{
 		base.OnAppearing();
-		collectionView.ItemsSource = await _adoptionFormService.GetAllAdoptionForms();
+		var adoptionForms = await _adoptionFormService.GetAllAdoptionForms();
+
+		if (adoptionForms.Any())
+		{
+			collectionView.ItemsSource = adoptionForms;
+		}
+		else
+		{
+			nothingYetLabel.IsVisible = true;
+		}
 	}
 
 	void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)

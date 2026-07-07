@@ -21,10 +21,10 @@
     <Nullable>enable</Nullable>
 
     <!-- Display name -->
-    <ApplicationTitle>MAUI101.Maui</ApplicationTitle>
+    <ApplicationTitle>Watson &amp; Pugh Pet Adoption</ApplicationTitle>
 
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.maui101.maui</ApplicationId>
+    <ApplicationId>com.watsonpughpetadoption.maui101.maui</ApplicationId>
 
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -40,10 +40,10 @@
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiIcon Include="Resources\AppIcon\appicon.png" Color="#ffffff" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#639e54" BaseSize="200,200" />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />

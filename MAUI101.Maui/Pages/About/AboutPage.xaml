@@ -7,11 +7,17 @@
         <VerticalStackLayout
             Padding="30,30"
             Spacing="25">
-            <Image
-                Source="icon.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="Watson &amp; Pugh Pet Adoption Agency Logo" />
+            <Border
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 15"
+                    HeightRequest="185"
+                    WidthRequest="185">
+                <Image
+                    Source="icon.png"
+                    HeightRequest="185"
+                    Aspect="AspectFill"
+                    SemanticProperties.Description="Watson &amp; Pugh Pet Adoption Agency Logo" />
+            </Border>
 
             <Label
                 Text="Watson &amp; Pugh Pet Adoption Agency"
