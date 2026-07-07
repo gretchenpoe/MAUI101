@@ -50,7 +50,7 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         await _adoptionFormService.AddNewAdoptionForm(AdoptionDetails);
 
         string message = $"Name: {AdoptionDetails.FirstName} {AdoptionDetails.LastName}\nEmail: {AdoptionDetails.Email}";
-        await Shell.Current.DisplayAlert("Form Submitted", message, "Success");
+        await Shell.Current.DisplayAlert("Form submitted successfully", message, "Success");
 
         // Navigate back to the previous page
         await Shell.Current.GoToAsync("..");

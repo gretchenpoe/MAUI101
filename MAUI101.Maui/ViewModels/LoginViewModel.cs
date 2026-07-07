@@ -45,9 +45,9 @@ namespace MAUI101.Maui.ViewModels
                         await _userService.AddNewUser(UserName, Password);
                         Preferences.Default.Set("IsLoggedIn", true);
                         await currentPage.DisplayAlert("Success", "Created a new user.", "OK");
-                        
+
                         // Navigate to the main application
-                        currentPage = new AppShell();
+                       Application.Current.Windows.FirstOrDefault().Page = new AppShell();
                     }
                     catch (Exception ex)
                     {
@@ -63,7 +63,7 @@ namespace MAUI101.Maui.ViewModels
                     {
                         Preferences.Default.Set("IsLoggedIn", true);
                         // Navigate to the main application
-                        currentPage = new AppShell();
+                       Application.Current.Windows.FirstOrDefault().Page = new AppShell();
                     }
                     else
                     {

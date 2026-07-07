@@ -18,11 +18,7 @@ namespace MAUI101.Maui
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            Window window;
-            // 1. Check if user is logged in (using Microsoft.Maui.Storage Preferences as an example)
-            //bool IsUserLoggedIn = Preferences.Default.Get("IsLoggedIn", false);
-             //if (!IsUserLoggedIn)
-            window = new Window(new LoginPage(new LoginViewModel(new UserService(new UserRepository(), new PasswordHelper(new PasswordHasher<User>()))))); // Navigate to LoginPage if not logged in
+            Window window = new Window(new LoginPage(new LoginViewModel(new UserService(new UserRepository(), new PasswordHelper(new PasswordHasher<User>()))))); // Navigate to LoginPage if not logged in
 
 
 #if WINDOWS
