@@ -36,9 +36,12 @@ namespace MAUI101.Maui
 
 
             builder.Services.AddSingleton<IAdoptionFormRepository, AdoptionFormRepository>();
+            builder.Services.AddSingleton<IUserRepository, UserRepository>();
             builder.Services.AddSingleton<IAdoptionFormService, AdoptionFormService>();
             builder.Services.AddSingleton<IRestService, RestService>();
 		    builder.Services.AddSingleton<IPetService, PetService>();
+            builder.Services.AddSingleton<IUserService, UserService>();
+            builder.Services.AddScoped<IPasswordHelper, PasswordHelper>();
 
             
 		    builder.Services.AddSingleton<AboutPage>();
@@ -47,6 +50,8 @@ namespace MAUI101.Maui
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<AdoptionFormPage>();
             builder.Services.AddTransient<AdoptionFormViewModel>();
+            builder.Services.AddTransient<AdoptionListViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
 
 
 

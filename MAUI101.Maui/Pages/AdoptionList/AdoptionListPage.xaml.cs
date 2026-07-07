@@ -1,23 +1,27 @@
 using MAUI101.Maui.Models;
 using MAUI101.Maui.Services;
+using MAUI101.Maui.ViewModels;
 
 namespace MAUI101.Maui.Pages;
 
 public partial class AdoptionListPage : ContentPage
 {
-	IPetService _petService;
+	 private readonly AdoptionListViewModel _viewModel;
 
-	public AdoptionListPage(IPetService petService)
+	public AdoptionListPage(AdoptionListViewModel viewModel)
 	{
 		InitializeComponent();
-		_petService = petService;
+		BindingContext = _viewModel = viewModel;
 	}
 
-	protected async override void OnAppearing()
+	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
 	{
-		base.OnAppearing();
-		collectionView.ItemsSource = await _petService.GetPetsAsync();
+		base.OnNavigatedTo(args);
+		
+
+		await _viewModel.LoadDataCommand.ExecuteAsync(null);
 	}
+
 
 	void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
@@ -26,12 +30,11 @@ public partial class AdoptionListPage : ContentPage
 		if (current == null)
 			return;
 
-		// Navigate to the details page, passing the pet
+		// Navigate to the details page, passing the pet data
 		var navigationParameter = new Dictionary<string, object>
 		{
-			{ "Pet", current } // Can pass strings, IDs, or complex objects
+			{ "Pet", current }
 		};
 		Shell.Current.GoToAsync($"{nameof(AdoptionFormPage)}", navigationParameter);
 	}
-
 }

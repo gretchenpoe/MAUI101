@@ -1,5 +1,9 @@
-﻿using MAUI101.Maui.Helpers;
+﻿using MAUI101.Maui.Models;
 using MAUI101.Maui.Pages;
+using MAUI101.Maui.Repositories;
+using MAUI101.Maui.Services;
+using MAUI101.Maui.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace MAUI101.Maui
 {
@@ -10,13 +14,17 @@ namespace MAUI101.Maui
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(AdoptionFormPage), typeof(AdoptionFormPage));
-
-            //MainPage = ServiceProviderHelper.GetService<MainPage>();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var window = new Window(new AppShell());
+            Window window;
+            // 1. Check if user is logged in (using Microsoft.Maui.Storage Preferences as an example)
+            //bool IsUserLoggedIn = Preferences.Default.Get("IsLoggedIn", false);
+             //if (!IsUserLoggedIn)
+            window = new Window(new LoginPage(new LoginViewModel(new UserService(new UserRepository(), new PasswordHelper(new PasswordHasher<User>()))))); // Navigate to LoginPage if not logged in
+
+
 #if WINDOWS
         window.Width = 500;
         window.Height = 300;

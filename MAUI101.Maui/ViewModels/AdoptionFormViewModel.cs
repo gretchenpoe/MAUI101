@@ -23,7 +23,7 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
     private Pet _petDetails;
 
     [ObservableProperty]
-    private bool _isReadonly = false;
+    private bool _isFormEnabled = true;
 
 
     [ObservableProperty]
@@ -52,8 +52,8 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         string message = $"Name: {AdoptionDetails.FirstName} {AdoptionDetails.LastName}\nEmail: {AdoptionDetails.Email}";
         await Shell.Current.DisplayAlert("Form Submitted", message, "Success");
 
-        Shell.Current.GoToAsync("..");
         // Navigate back to the previous page
+        await Shell.Current.GoToAsync("..");
     }
 
     private async Task<bool> ValidateForm()
@@ -79,8 +79,12 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         if (query.TryGetValue("AdoptionForm", out var formValue) && formValue is AdoptionForm form)
         {
             AdoptionDetails = form;
-            PetDetails = _petService.GetPetByIdAsync(form.PetId).Result;
-            IsReadonly = true;
+            IsFormEnabled = false;
+            // 2. Offload the async work safely to avoid locking the UI thread
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                PetDetails = await _petService.GetPetByIdAsync(form.PetId);
+            });
         }
     
         // Create adoption form scenario

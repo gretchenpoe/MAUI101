@@ -5,13 +5,13 @@
              Title="Home">
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
+            Padding="30,30"
             Spacing="25">
             <Image
                 Source="icon.png"
                 HeightRequest="185"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
+                SemanticProperties.Description="Watson &amp; Pugh Pet Adoption Agency Logo" />
 
             <Label
                 Text="Watson &amp; Pugh Pet Adoption Agency"

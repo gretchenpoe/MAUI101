@@ -4,13 +4,19 @@
              x:Class="MAUI101.Maui.Pages.AdoptionFormPage"
              xmlns:viewmodels="clr-namespace:MAUI101.Maui.ViewModels"
              Title="Adoption Form"
-              x:DataType="viewmodels:AdoptionFormViewModel">
+             x:DataType="viewmodels:AdoptionFormViewModel">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-              <Image Source="{Binding PetDetails.Url}" 
-                     Aspect="AspectFill"
-                     HeightRequest="100" 
-                     WidthRequest="150" />
+              <Border
+                     StrokeThickness="0"
+                     StrokeShape="RoundRectangle 15"
+                     HeightRequest="150"
+                     WidthRequest="200">
+                     <Image Source="{Binding PetDetails.Url}" 
+                            Aspect="AspectFill"
+                            HeightRequest="150" 
+                            WidthRequest="200" />
+              </Border>
               <Label
                      Text="{Binding PetDetails.Breeds[0].Name}" 
                      FontAttributes="Bold"
@@ -22,18 +28,21 @@
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
               </HorizontalStackLayout>
               <Entry Text="{Binding AdoptionDetails.FirstName, Mode=TwoWay}" 
-                     Placeholder="Enter your first name" MaxLength="100"/>
+                     Placeholder="Enter your first name" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
               <!-- Middle Name Input -->
               <Label Text="Middle Name" FontAttributes="Bold" />
               <Entry Text="{Binding AdoptionDetails.MiddleName, Mode=TwoWay}" 
-                     Placeholder="Enter your middle name" MaxLength="100"/>
+                     Placeholder="Enter your middle name" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
               <!-- Last Name Input -->
               <HorizontalStackLayout>
                      <Label Text="Last Name" FontAttributes="Bold"/>
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
               </HorizontalStackLayout>
               <Entry Text="{Binding AdoptionDetails.LastName, Mode=TwoWay}" 
-                     Placeholder="Enter your last name" MaxLength="100"/>
+                     Placeholder="Enter your last name" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
               <!-- Birth Date Input -->
               <HorizontalStackLayout>
                      <Label Text="Date of Birth" FontAttributes="Bold"/>
@@ -41,7 +50,8 @@
               </HorizontalStackLayout>
               <DatePicker Date="{Binding AdoptionDetails.BirthDate, Mode=TwoWay}" 
                      MinimumDate="01/01/1900"
-                     MaximumDate="{Binding MaxDate}"/>
+                     MaximumDate="{Binding MaxDate}"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
 
               <!-- Street Address Input -->
               <HorizontalStackLayout>
@@ -49,14 +59,16 @@
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
               </HorizontalStackLayout>
               <Entry Text="{Binding AdoptionDetails.StreetAddress, Mode=TwoWay}"    
-                     Placeholder="Enter your street address" MaxLength="100"/>
+                     Placeholder="Enter your street address" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
               <!-- City Input -->
               <HorizontalStackLayout>
                      <Label Text="City" FontAttributes="Bold"/>
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold"/>
               </HorizontalStackLayout>
               <Entry Text="{Binding AdoptionDetails.City, Mode=TwoWay}"    
-                     Placeholder="Enter your city" MaxLength="100"/>
+                     Placeholder="Enter your city" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
               <!-- State Input -->
               <HorizontalStackLayout>
                      <Label Text="State" FontAttributes="Bold"/>
@@ -65,7 +77,8 @@
               <Picker x:Name="picker"
                      ItemsSource="{Binding StatesList}"
                      SelectedItem="{Binding AdoptionDetails.State, Mode=TwoWay}"
-                     Title="Select a state">
+                     Title="Select a state"
+                     IsEnabled ="{Binding IsFormEnabled}">
               </Picker>
               <!-- ZIP Code Input -->
               <HorizontalStackLayout>
@@ -75,7 +88,8 @@
               <Entry Text="{Binding AdoptionDetails.ZipCode, Mode=TwoWay}"    
                      Placeholder="Enter your ZIP code" 
                       Keyboard="Telephone"
-                      MaxLength="5"/>
+                      MaxLength="5"
+                      IsEnabled ="{Binding IsFormEnabled}"/>
 
               <!-- Phone Number -->
               <HorizontalStackLayout>
@@ -85,7 +99,8 @@
               <Entry Text="{Binding AdoptionDetails.Phone, Mode=TwoWay}" 
                      Placeholder="Enter your phone number" 
                      Keyboard="Telephone" 
-                     MaxLength="15"/>
+                     MaxLength="15"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
 
               <!-- Email Input -->
              <HorizontalStackLayout>
@@ -95,7 +110,8 @@
               <Entry Text="{Binding AdoptionDetails.Email, Mode=TwoWay}" 
                    Placeholder="Enter your email" 
                    Keyboard="Email" 
-                   MaxLength="254"/>
+                   MaxLength="254"
+                   IsEnabled ="{Binding IsFormEnabled}"/>
 
             <!-- Pet Name Input -->
               <HorizontalStackLayout>
@@ -103,13 +119,15 @@
                      <Label Text=" *" TextColor="Red" FontAttributes="Bold" />
               </HorizontalStackLayout>
               <Entry Text="{Binding AdoptionDetails.PetName, Mode=TwoWay}"    
-                     Placeholder="Enter your pet's name" MaxLength="100"/>
+                     Placeholder="Enter your pet's name" MaxLength="100"
+                     IsEnabled ="{Binding IsFormEnabled}"/>
 
 
               <!-- Submit Button -->
               <Button Text="Submit" 
                      Command="{Binding SubmitFormCommand}"
-                     Margin="0,20,0,0" />
+                     Margin="0,20,0,0"
+                     IsVisible ="{Binding IsFormEnabled}" />
 
         </VerticalStackLayout>
     </ScrollView>

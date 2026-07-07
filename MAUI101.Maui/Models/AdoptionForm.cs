@@ -3,7 +3,7 @@ using SQLite;
 
 namespace MAUI101.Maui.Models
 {
-    [Table("adoptionForm")]
+    [Table("adoptionForms")]
     public class AdoptionForm
     {
         [PrimaryKey, AutoIncrement]

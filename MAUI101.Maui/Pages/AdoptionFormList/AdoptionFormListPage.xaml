@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI101.Maui.Pages.AdoptionFormListPage"
              xmlns:models="clr-namespace:MAUI101.Maui.Models"
-             Title="Submitted Adoption Forms">
+             Title="Adoption Forms">
     <CollectionView x:Name="collectionView"
                         Margin="20"
                         SelectionMode="Single"
@@ -13,10 +13,9 @@
                      <Grid HorizontalOptions="Fill" Padding="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25" />
-                            <RowDefinition Height="75" />
+                            <RowDefinition Height="25" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="1" 

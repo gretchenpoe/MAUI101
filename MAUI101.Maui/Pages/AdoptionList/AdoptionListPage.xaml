@@ -2,40 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MAUI101.Maui.Models"
+             xmlns:viewmodels="clr-namespace:MAUI101.Maui.ViewModels"
              x:Class="MAUI101.Maui.Pages.AdoptionListPage"
+             x:DataType="viewmodels:AdoptionListViewModel"
              Title="Pets Available for Adoption">
-    <CollectionView x:Name="collectionView"
-                        Margin="20"
-                        SelectionMode="Single"
-                        SelectionChanged="OnCollectionViewSelectionChanged">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Pet">
-                     <Grid HorizontalOptions="Fill" Padding="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
-                            <RowDefinition Height="75" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.RowSpan="2" 
-                               Source="{Binding Url}" 
-                               Aspect="AspectFill"
-                               HeightRequest="100" 
-                               WidthRequest="150" />
-                        <Label Grid.Column="1" 
-                               Text="{Binding Breeds[0].Name}" 
-                               FontAttributes="Bold"
-                               LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="1"
-                               Grid.Column="1" 
-                               Text="{Binding Breeds[0].Temperament}"
-                               LineBreakMode="WordWrap"
-                               FontAttributes="Italic" 
-                               VerticalOptions="Start" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-    </CollectionView>
+    <Grid>
+        <CollectionView x:Name="collectionView"
+                            Margin="20"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCollectionViewSelectionChanged"
+                            ItemsSource="{Binding Pets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Pet">
+                        <Grid HorizontalOptions="Fill" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="75" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.RowSpan="2"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 15"
+                                HeightRequest="100"
+                                WidthRequest="150">
+                                <Image Grid.RowSpan="2" 
+                                    Source="{Binding Url}" 
+                                    Aspect="AspectFill"
+                                    HeightRequest="100" 
+                                    WidthRequest="150" />
+                            </Border>
+                            <Label Grid.Column="1" 
+                                Text="{Binding Breeds[0].Name}" 
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation" />
+                            <Label Grid.Row="1"
+                                Grid.Column="1" 
+                                Text="{Binding Breeds[0].Temperament}"
+                                LineBreakMode="WordWrap"
+                                FontAttributes="Italic" 
+                                VerticalOptions="Start" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Grid IsVisible="{Binding IsLoading}">
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                    Color="#639e54"
+                                    HeightRequest="50"
+                                    WidthRequest="50" />
+                    <Label Text="Loading..." 
+                        TextColor="#639e54" 
+                        HorizontalOptions="Center" 
+                        Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
 </ContentPage>
