@@ -20,7 +20,7 @@ namespace MAUI101.Maui.Models
         [SQLite.MaxLength(100)]
         public string LastName { get; set; }
         [Required (ErrorMessage = "Date of birth is required.")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         [Required (ErrorMessage = "Street address is required.")]
         public string StreetAddress { get; set; }
         [Required (ErrorMessage = "City is required.")]

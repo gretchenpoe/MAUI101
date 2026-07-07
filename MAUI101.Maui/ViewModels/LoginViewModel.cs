@@ -42,6 +42,10 @@ namespace MAUI101.Maui.ViewModels
                 {
                     // User does not exist, create new one
                     try { 
+                        if(string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+                        {
+                            await currentPage.DisplayAlert("Error", "Please fill out all fields.", "OK");
+                        }
                         await _userService.AddNewUser(UserName, Password);
                         Preferences.Default.Set("IsLoggedIn", true);
                         await currentPage.DisplayAlert("Success", "Created a new user.", "OK");

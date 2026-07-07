@@ -10,12 +10,12 @@
               <Border
                      StrokeThickness="0"
                      StrokeShape="RoundRectangle 15"
-                     HeightRequest="150"
-                     WidthRequest="200">
+                     HeightRequest="200"
+                     WidthRequest="250">
                      <Image Source="{Binding PetDetails.Url}" 
                             Aspect="AspectFill"
-                            HeightRequest="150" 
-                            WidthRequest="200" />
+                            HeightRequest="200" 
+                            WidthRequest="250" />
               </Border>
               <Label
                      Text="{Binding PetDetails.Breeds[0].Name}" 
