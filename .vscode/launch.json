@@ -1,0 +1,10 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+            "name": ".NET MAUI: Debug App",
+            "type": "maui",
+            "request": "launch",
+            "preLaunchTask": "maui: Build",
+            "configuration": "Debug"
+        }]
+}
