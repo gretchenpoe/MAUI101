@@ -45,9 +45,9 @@ namespace MAUI101.Maui.ViewModels
                         if(string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
                         {
                             await currentPage.DisplayAlert("Error", "Please fill out all fields.", "OK");
+                            return;
                         }
                         await _userService.AddNewUser(UserName, Password);
-                        Preferences.Default.Set("IsLoggedIn", true);
                         await currentPage.DisplayAlert("Success", "Created a new user.", "OK");
 
                         // Navigate to the main application
@@ -56,7 +56,6 @@ namespace MAUI101.Maui.ViewModels
                     catch (Exception ex)
                     {
                         await currentPage.DisplayAlert("Error", "Failed to create new user.", "OK");
-                        IsLoading = false; // Hides spinner
                         return;
                     }
                 }
@@ -65,7 +64,6 @@ namespace MAUI101.Maui.ViewModels
                     var isValidUser = await _userService.VerifyUserPassword(UserName, Password);
                     if (isValidUser)
                     {
-                        Preferences.Default.Set("IsLoggedIn", true);
                         // Navigate to the main application
                        Application.Current.Windows.FirstOrDefault().Page = new AppShell();
                     }
@@ -73,8 +71,13 @@ namespace MAUI101.Maui.ViewModels
                     {
                         // Show an error message or handle invalid login
                         await currentPage.DisplayAlert("Login Failed", "Invalid username or password.", "OK");
+                        return;
                     }
                 }
+            }
+            catch(Exception)
+            {
+                await currentPage.DisplayAlert("Error", "Failed to get user data", "OK");
             }
             finally
             {

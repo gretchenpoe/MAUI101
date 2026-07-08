@@ -8,6 +8,7 @@ namespace MAUI101.Maui.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [Unique]
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
     }

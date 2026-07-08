@@ -1,35 +1,23 @@
 using MAUI101.Maui.Models;
-using SQLite;
 
 namespace MAUI101.Maui.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    string _dbPath;
+    private IDbConnectionProvider _dbConnectionProvider;
 
     public string StatusMessage { get; set; }
 
-    private SQLiteAsyncConnection conn;
-
-    private async Task Init()
+    public UserRepository(IDbConnectionProvider dbConnectionProvider)
     {
-        if (conn != null)
-            return;
-
-        conn = new SQLiteAsyncConnection(_dbPath);
-        await conn.CreateTableAsync<User>();    
-    }
-
-    public UserRepository()
-    {
-        _dbPath = FileSystem.AppDataDirectory + Path.DirectorySeparatorChar + "WatsonPughPetAdoption.db3";                        
+        _dbConnectionProvider = dbConnectionProvider;                    
     }
 
     public async Task AddNewUser(User user)
     {            
         try
         {
-            await Init();
+            var conn = await _dbConnectionProvider.Init();
             int result = await conn.InsertAsync(user);
 
             StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, user.UserName);
@@ -41,18 +29,17 @@ public class UserRepository : IUserRepository
 
     }
 
-    public async Task<User> GetUserByUserName(string userName)
+    public async Task<User?> GetUserByUserName(string userName)
     {
         try
         {
-            await Init();
+            var conn = await _dbConnectionProvider.Init();
             return await conn.Table<User>().Where(u => u.UserName == userName).FirstOrDefaultAsync();
         }
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            throw;
         }
-
-        return new User();
     }
 }

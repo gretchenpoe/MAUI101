@@ -1,6 +1,8 @@
 using MAUI101.Maui.Models;
 using Microsoft.AspNetCore.Identity;
 
+namespace MAUI101.Maui.Helpers;
+
 public interface IPasswordHelper
 {
     string HashPassword(User user, string password);

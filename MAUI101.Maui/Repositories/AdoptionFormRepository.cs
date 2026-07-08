@@ -1,35 +1,23 @@
 using MAUI101.Maui.Models;
-using SQLite;
 
 namespace MAUI101.Maui.Repositories;
 
 public class AdoptionFormRepository : IAdoptionFormRepository
 {
-    string _dbPath;
+    private IDbConnectionProvider _dbConnectionProvider;
 
     public string StatusMessage { get; set; }
 
-    private SQLiteAsyncConnection conn;
-
-    private async Task Init()
+    public AdoptionFormRepository(IDbConnectionProvider dbConnectionProvider)
     {
-        if (conn != null)
-            return;
-
-        conn = new SQLiteAsyncConnection(_dbPath);
-        await conn.CreateTableAsync<AdoptionForm>();    
-    }
-
-    public AdoptionFormRepository()
-    {
-        _dbPath = FileSystem.AppDataDirectory + Path.DirectorySeparatorChar + "WatsonPughPetAdoption.db3";                        
+       _dbConnectionProvider = dbConnectionProvider;                       
     }
 
     public async Task AddNewAdoptionForm(AdoptionForm form)
     {            
         try
         {
-            await Init();
+            var conn = await _dbConnectionProvider.Init();
             int result = await conn.InsertAsync(form);
 
             StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, form.FirstName);
@@ -45,7 +33,7 @@ public class AdoptionFormRepository : IAdoptionFormRepository
     {
         try
         {
-            await Init();
+            var conn = await _dbConnectionProvider.Init();
             return await conn.Table<AdoptionForm>().ToListAsync();
         }
         catch (Exception ex)

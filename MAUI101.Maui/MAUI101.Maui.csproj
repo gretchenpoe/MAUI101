@@ -57,6 +57,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Raw\config.json" />
+    <EmbeddedResource Include="Resources\Raw\config.local.json" />
   </ItemGroup>
 
   <ItemGroup>

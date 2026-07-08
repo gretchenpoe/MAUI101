@@ -22,6 +22,7 @@ public partial class AdoptionFormListPage : ContentPage
 		if (adoptionForms.Any())
 		{
 			collectionView.ItemsSource = adoptionForms;
+			nothingYetLabel.IsVisible = false;
 		}
 		else
 		{

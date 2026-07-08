@@ -9,16 +9,18 @@ namespace MAUI101.Maui
 {
     public partial class App : Application
     {
-        public App()
+        IServiceProvider _services;
+        public App(IServiceProvider services)
         {
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(AdoptionFormPage), typeof(AdoptionFormPage));
+            _services = services;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            Window window = new Window(new LoginPage(new LoginViewModel(new UserService(new UserRepository(), new PasswordHelper(new PasswordHasher<User>()))))); // Navigate to LoginPage if not logged in
+            Window window = new Window(_services.GetRequiredService<LoginPage>()); // Navigate to LoginPage if not logged in
 
 
 #if WINDOWS
