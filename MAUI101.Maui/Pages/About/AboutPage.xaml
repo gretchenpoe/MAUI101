@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI101.Maui.Pages.AboutPage"
+             Title="Home">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,30"
+            Spacing="25">
+            <Border
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 15"
+                    HeightRequest="185"
+                    WidthRequest="185">
+                <Image
+                    Source="icon.png"
+                    HeightRequest="185"
+                    Aspect="AspectFill"
+                    SemanticProperties.Description="Watson &amp; Pugh Pet Adoption Agency Logo" />
+            </Border>
+
+            <Label
+                Text="Watson &amp; Pugh Pet Adoption Agency"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="The WPPAA exists to assist companion animals in finding housing and promote kindness and a clear opportunity in life."
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="The WPPAA exists to assist companion animals in finding housing and promote kindness and a clear opportunity in life." />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

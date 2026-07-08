@@ -1,6 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using MAUI101.Maui.Services;
+using MAUI101.Maui.Pages;
+using MAUI101.Maui.Helpers;
+using MAUI101.Maui.ViewModels;
+using MAUI101.Maui.Repositories;
+using Microsoft.AspNetCore.Identity;
+using MAUI101.Maui.Models;
 
 namespace MAUI101.Maui
 {
@@ -18,18 +25,41 @@ namespace MAUI101.Maui
                 });
 
             var a = Assembly.GetExecutingAssembly();
+
+#if DEBUG
+            using var stream = a.GetManifestResourceStream($"MAUI101.Maui.Resources.Raw.config.local.json");
+#else
             using var stream = a.GetManifestResourceStream($"MAUI101.Maui.Resources.Raw.config.json");
-            var names = a.GetManifestResourceNames();
-            foreach( var name in names )
-            {
-                Console.WriteLine( name );
-            }
+#endif
+ 
             var config = new ConfigurationBuilder()
                 .AddJsonStream(stream)
                 .Build();
             builder.Configuration.AddConfiguration(config);
 
-            builder.Services.AddTransient<MainPage>();
+
+            builder.Services.AddSingleton<IDbConnectionProvider, DbConnectionProvider>();
+            builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+            builder.Services.AddSingleton<IPasswordHelper, PasswordHelper>();
+            builder.Services.AddSingleton<IAdoptionFormRepository, AdoptionFormRepository>();
+            builder.Services.AddSingleton<IUserRepository, UserRepository>();
+            builder.Services.AddSingleton<IAdoptionFormService, AdoptionFormService>();
+            builder.Services.AddSingleton<IRestService, RestService>();
+		    builder.Services.AddSingleton<IPetService, PetService>();
+            builder.Services.AddSingleton<IUserService, UserService>();
+            
+            builder.Services.AddTransient<AdoptionFormViewModel>();
+            builder.Services.AddTransient<AdoptionListViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
+
+            
+		    builder.Services.AddSingleton<AboutPage>();
+		    builder.Services.AddSingleton<AdoptionListPage>();
+            builder.Services.AddSingleton<AdoptionFormListPage>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<AdoptionFormPage>();
+
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

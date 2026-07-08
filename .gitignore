@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Andriod Studio / IntelliJ
+.idea
+
+# Local config file
+**/config.local.json
