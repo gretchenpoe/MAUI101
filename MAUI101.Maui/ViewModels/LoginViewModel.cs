@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MAUI101.Maui.Models;
 using MAUI101.Maui.Services;
-using MAUI101.Maui.Pages;
+using System.Diagnostics;
 
 namespace MAUI101.Maui.ViewModels
 {
@@ -37,12 +37,13 @@ namespace MAUI101.Maui.ViewModels
             try
             {
                 IsLoading = true; // Shows spinner
-                User user = await _userService.GetUserByUserName(UserName);
+                User? user = await _userService.GetUserByUserName(UserName);
                 if (user == null)
                 {
                     // User does not exist, create new one
-                    try { 
-                        if(string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+                    try 
+                    { 
+                        if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
                         {
                             await currentPage.DisplayAlert("Error", "Please fill out all fields.", "OK");
                             return;
@@ -51,11 +52,12 @@ namespace MAUI101.Maui.ViewModels
                         await currentPage.DisplayAlert("Success", "Created a new user.", "OK");
 
                         // Navigate to the main application
-                       Application.Current.Windows.FirstOrDefault().Page = new AppShell();
+                        Application.Current.Windows.FirstOrDefault().Page = new AppShell();
                     }
                     catch (Exception ex)
                     {
                         await currentPage.DisplayAlert("Error", "Failed to create new user.", "OK");
+                        Debug.WriteLine($"Failed to create new user. Exception: {ex.Message}");
                         return;
                     }
                 }
@@ -75,9 +77,10 @@ namespace MAUI101.Maui.ViewModels
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception ex)
             {
                 await currentPage.DisplayAlert("Error", "Failed to get user data", "OK");
+                Debug.WriteLine($"Failed to get user data. Exception: {ex.Message}");
             }
             finally
             {

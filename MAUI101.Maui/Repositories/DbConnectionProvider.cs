@@ -10,8 +10,6 @@ public interface IDbConnectionProvider
 
 public class DbConnectionProvider : IDbConnectionProvider
 {
-    string _dbPath;
-
     private SQLiteAsyncConnection conn;
 
     public async Task<SQLiteAsyncConnection> Init()
@@ -19,7 +17,7 @@ public class DbConnectionProvider : IDbConnectionProvider
         if (conn != null)
             return conn;
 
-        _dbPath = FileSystem.AppDataDirectory + Path.DirectorySeparatorChar + "WatsonPughPetAdoption.db3"; 
+        string _dbPath = FileSystem.AppDataDirectory + Path.DirectorySeparatorChar + "WatsonPughPetAdoption.db3"; 
 
         conn = new SQLiteAsyncConnection(_dbPath);
         await conn.CreateTableAsync<User>();    

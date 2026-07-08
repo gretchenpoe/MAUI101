@@ -73,23 +73,21 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Pages\AdoptionFormsPage.xaml.cs">
-      <DependentUpon>AdoptionFormsPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 
   <ItemGroup>
-    <MauiXaml Update="Pages\AboutPage.xaml">
+    <MauiXaml Update="Pages\About\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Pages\AdoptionFormsPage.xaml">
+    <MauiXaml Update="Pages\AdoptionForm\AdoptionFormPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Pages\AdoptionListPage.xaml">
+    <MauiXaml Update="Pages\AdoptionList\AdoptionListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Pages\LoginPage.xaml">
+    <MauiXaml Update="Pages\AdoptionFormList\AdoptionFormListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Login\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

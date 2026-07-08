@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MAUI101.Maui.Models;
 using System.ComponentModel.DataAnnotations;
 using MAUI101.Maui.Services;
+using System.Diagnostics;
 
 namespace MAUI101.Maui.ViewModels;
 
@@ -10,6 +11,10 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
 {
     private readonly IPetService _petService;
     private readonly IAdoptionFormService _adoptionFormService;
+    
+    [ObservableProperty]
+    private bool _isLoading;
+
     public AdoptionFormViewModel(IPetService petService, IAdoptionFormService adoptionFormService)
     {
         _petService = petService;
@@ -46,8 +51,17 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         if (!isValid)
             return;
 
-        // Save to local storage
-        await _adoptionFormService.AddNewAdoptionForm(AdoptionDetails);
+        try
+        { 
+            // Save to local storage
+            await _adoptionFormService.AddNewAdoptionForm(AdoptionDetails);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", "Failed to save adoption form", "OK");
+            Debug.WriteLine($"Failed to save adoption form. Exception: {ex.Message}");
+            return;
+        }
 
         await Shell.Current.DisplayAlert("Form submitted successfully", "", "OK");
 
@@ -72,6 +86,33 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         return true;
     }
 
+    [RelayCommand]
+    private async Task LoadPetDataAsync()
+    {
+        if (IsLoading) return;
+
+        if(PetDetails != null) {
+            IsLoading = false;
+            return;
+        }
+
+        try
+        {
+            IsLoading = true; // Shows spinner
+            PetDetails = await _petService.GetPetByIdAsync(AdoptionDetails.PetId);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", "Failed to get pet data for adoption form", "OK");
+            Debug.WriteLine($"Failed to get pet data for adoption form. Exception: {ex.Message}");
+            return;
+        }
+        finally
+        {
+            IsLoading = false; // Hides spinner
+        }
+    }
+
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         // Readonly of existing adoption form scenario
@@ -79,11 +120,6 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         {
             AdoptionDetails = form;
             IsFormEnabled = false;
-            // 2. Offload the async work safely to avoid locking the UI thread
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                PetDetails = await _petService.GetPetByIdAsync(form.PetId);
-            });
         }
     
         // Create adoption form scenario

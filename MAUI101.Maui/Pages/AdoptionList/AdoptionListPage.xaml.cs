@@ -6,7 +6,7 @@ namespace MAUI101.Maui.Pages;
 
 public partial class AdoptionListPage : ContentPage
 {
-	 private readonly AdoptionListViewModel _viewModel;
+	private readonly AdoptionListViewModel _viewModel;
 
 	public AdoptionListPage(AdoptionListViewModel viewModel)
 	{
