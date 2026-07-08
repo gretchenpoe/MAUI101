@@ -366,4 +366,4 @@ FodyWeavers.xsd
 .idea
 
 # Local config file
-*/*/*/config.local.json
+**/config.local.json

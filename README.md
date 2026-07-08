@@ -1,2 +1,4 @@
 # Maui 101 Getting Started
-To begin working on the MAUI training, you will need to create a new branch. The naming convention of the new branch should be "users/[your name]"
+To run locally, create a copy of config.json under Resources/Raw/ and rename it config.local.json, and then update the APIKey value to a real API Key for api.thecatapi.com. 
+
+Tested using Android Studio only.
