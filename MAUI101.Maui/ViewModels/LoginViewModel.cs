@@ -45,18 +45,18 @@ namespace MAUI101.Maui.ViewModels
                     { 
                         if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
                         {
-                            await currentPage.DisplayAlert("Error", "Please fill out all fields.", "OK");
+                            await currentPage.DisplayAlertAsync("Error", "Please fill out all fields.", "OK");
                             return;
                         }
                         await _userService.AddNewUser(UserName, Password);
-                        await currentPage.DisplayAlert("Success", "Created a new user.", "OK");
+                        await currentPage.DisplayAlertAsync("Success", "Created a new user.", "OK");
 
                         // Navigate to the main application
                         Application.Current.Windows.FirstOrDefault().Page = new AppShell();
                     }
                     catch (Exception ex)
                     {
-                        await currentPage.DisplayAlert("Error", "Failed to create new user.", "OK");
+                        await currentPage.DisplayAlertAsync("Error", "Failed to create new user.", "OK");
                         Debug.WriteLine($"Failed to create new user. Exception: {ex.Message}");
                         return;
                     }
@@ -72,14 +72,14 @@ namespace MAUI101.Maui.ViewModels
                     else
                     {
                         // Show an error message or handle invalid login
-                        await currentPage.DisplayAlert("Login Failed", "Invalid username or password.", "OK");
+                        await currentPage.DisplayAlertAsync("Login Failed", "Invalid username or password.", "OK");
                         return;
                     }
                 }
             }
             catch (Exception ex)
             {
-                await currentPage.DisplayAlert("Error", "Failed to get user data", "OK");
+                await currentPage.DisplayAlertAsync("Error", "Failed to get user data", "OK");
                 Debug.WriteLine($"Failed to get user data. Exception: {ex.Message}");
             }
             finally

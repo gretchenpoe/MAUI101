@@ -58,12 +58,12 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", "Failed to save adoption form", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", "Failed to save adoption form", "OK");
             Debug.WriteLine($"Failed to save adoption form. Exception: {ex.Message}");
             return;
         }
 
-        await Shell.Current.DisplayAlert("Form submitted successfully", "", "OK");
+        await Shell.Current.DisplayAlertAsync("Form submitted successfully", "", "OK");
 
         // Navigate back to the previous page
         await Shell.Current.GoToAsync("..");
@@ -80,7 +80,7 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
 
         if (!isValid)
         {
-            await Shell.Current.DisplayAlert("Validation Errors", string.Join("\n", results.Select(r => r.ErrorMessage)), "OK");
+            await Shell.Current.DisplayAlertAsync("Validation Errors", string.Join("\n", results.Select(r => r.ErrorMessage)), "OK");
             return false;
         }
         return true;
@@ -103,7 +103,7 @@ public partial class AdoptionFormViewModel : ObservableObject, IQueryAttributabl
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", "Failed to get pet data for adoption form", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", "Failed to get pet data for adoption form", "OK");
             Debug.WriteLine($"Failed to get pet data for adoption form. Exception: {ex.Message}");
             return;
         }

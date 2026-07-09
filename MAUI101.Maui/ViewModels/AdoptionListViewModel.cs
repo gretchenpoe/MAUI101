@@ -38,7 +38,7 @@ namespace MAUI101.Maui.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to get pet data", "OK");
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to get pet data", "OK");
                 Debug.WriteLine($"Failed to get pet data. Exception: {ex.Message}");
             }
             finally
